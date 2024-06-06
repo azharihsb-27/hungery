@@ -1,0 +1,484 @@
+/* Variables */
+@import './variables.scss';
+
+/* Mixins */
+@import './mixins.scss';
+
+// Resetting All Elements Styles
+* {
+  padding: 0;
+  margin: 0;
+  font-family: $primary-font;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#skip-to-content {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  padding: 8px 12px;
+  background-color: $primary-color;
+  color: $base-color;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.4s ease-in-out;
+  z-index: 99;
+}
+
+#skip-to-content:focus {
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -15%);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Start of Header*/
+header {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 80px;
+  padding: 0 25px;
+  z-index: 99;
+
+  .navbar {
+    @include flex(space-between, center);
+    height: 100%;
+
+    .nav-brand {
+      color: $base-color;
+      font-size: 1.2rem;
+      padding: 12px 14px;
+      font-weight: $semibold-weight;
+      text-decoration: none;
+      span {
+        color: $secondary-color;
+      }
+    }
+    .nav-links {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: max-content;
+      padding: 30px 0;
+      display: none;
+      background-color: $primary-color;
+      list-style: none;
+      transition: all 0.2s ease-in-out;
+
+      .nav-links_item a {
+        padding: 14px;
+        text-decoration: none;
+        color: $base-color;
+        font-family: $secondary-font;
+        font-weight: $semibold-weight;
+        transition: all 0.2s ease-out;
+      }
+      .nav-links_item a:hover {
+        color: $secondary-color;
+      }
+    }
+    .nav-btn {
+      @include clickable(12px 14px, $base-color, transparent, 22px);
+    }
+  }
+  .navbar.active {
+    .nav-links {
+      @include flex(center, center, column, 15px);
+      transform: translateY(80px);
+    }
+  }
+}
+header:has(.navbar.active) {
+  background-color: $accent-color;
+}
+/* End of Header */
+
+/* Start of Main */
+main {
+  width: 100%;
+  flex: 1;
+
+  // Start of Hero Section
+  .hero {
+    width: 100%;
+    height: 100vh;
+    padding: 0 25px;
+    @include flex(center, center, column, 150px);
+    background-image: url('./images/hero-image_2-small.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: 30%;
+
+    &_description {
+      color: $base-color;
+
+      p {
+        font-size: 1.2rem;
+      }
+      h1 {
+        font-size: 2.2rem;
+        font-weight: $semibold-weight;
+        font-family: $secondary-font;
+
+        span {
+          color: $primary-color;
+          font-weight: $bold-weight;
+        }
+      }
+    }
+    .explore {
+      @include clickable(10px 8px, $base-color, $primary-color, 1rem);
+      border: $primary-color 1px solid;
+      transition: all 0.1s ease-in-out;
+      text-decoration: none;
+    }
+    .explore:hover {
+      color: $primary-color;
+      background-color: $base-color;
+      border: $primary-color 1px solid;
+    }
+    .explore:active {
+      background-color: #ccc7c4;
+    }
+  }
+
+  // Start of About
+  .about {
+    width: 100%;
+    padding: 24px 25px;
+    background-color: $secondary-color;
+
+    &_title {
+      color: $base-color;
+      font-size: 1.5rem;
+      font-family: $secondary-font;
+      font-weight: $medium-weight;
+
+      span {
+        color: $primary-color;
+      }
+    }
+    &_description {
+      padding: 12px 0;
+
+      &_content {
+        color: $base-color;
+        font-size: 0.9rem;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        p {
+          span {
+            font-size: 1.2rem;
+            color: $primary-color;
+          }
+        }
+        button {
+          padding: 12px 16px;
+          color: white;
+          background-color: $primary-color;
+          border: none;
+          outline: none;
+          width: max-content;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  // Start of All Kitchen
+  .all-kitchen {
+    width: 100%;
+    padding: 36px 25px;
+
+    &_title {
+      color: $primary-color;
+      font-size: 1.5rem;
+      font-family: $secondary-font;
+      font-weight: $bold-weight;
+
+      span {
+        color: $accent-color;
+      }
+    }
+  }
+
+  // Start of Detail
+  .detail {
+    width: 100%;
+    padding: 80px 0 0;
+
+    .kitchen-detail_wrapper {
+      padding: 24px 25px 0;
+
+      .kitchen-detail_title {
+        color: $primary-color;
+        font-size: 1.5rem;
+        font-family: $secondary-font;
+        font-weight: $bold-weight;
+      }
+      .kitchen-detail_img {
+        width: 100%;
+        height: 250px;
+        margin-top: 12px;
+        object-fit: cover;
+      }
+      .kitchen-detail_description {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        & > .kitchen-address-rating {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin: 6px 0;
+          padding-inline: 2px;
+          font-size: 0.9rem;
+          font-weight: $bold-weight;
+          color: $accent-color;
+        }
+        .kitchen-description {
+          font-size: 1rem;
+          line-height: 20px;
+        }
+        .kitchen-menu {
+          display: flex;
+          flex-direction: column;
+          margin-top: 36px;
+
+          &_title {
+            color: $primary-color;
+            font-size: 1.4rem;
+            font-family: $secondary-font;
+            font-weight: $bold-weight;
+          }
+          &_foods {
+            width: 100%;
+            margin: 8px 0 32px;
+
+            h3 {
+              color: $primary-color;
+              font-size: 1.2rem;
+              text-align: center;
+            }
+            .food-list {
+              width: 100%;
+              margin-top: 12px;
+              @include grid(repeat(1, 1fr), 12px);
+              list-style: none;
+
+              .food-item {
+                width: 100%;
+                padding: 8px 0;
+                text-align: center;
+                color: $accent-color;
+                cursor: default;
+                transition: all 0.3s ease-in-out;
+                border-radius: 2px;
+                border-bottom: 2px solid $primary-color;
+              }
+              .food-item:hover {
+                color: $base-color;
+                background-color: $primary-color;
+                transform: translateY(-4px);
+              }
+            }
+          }
+          &_drinks {
+            width: 100%;
+            margin: 8px 0 0;
+
+            h3 {
+              color: $primary-color;
+              font-size: 1.2rem;
+              text-align: center;
+            }
+            .food-list {
+              width: 100%;
+              margin-top: 12px;
+              @include grid(repeat(1, 1fr), 12px);
+              list-style: none;
+
+              .food-item {
+                width: 100%;
+                padding: 8px 0;
+                text-align: center;
+                color: $accent-color;
+                cursor: default;
+                transition: all 0.3s ease-in-out;
+                border-radius: 2px;
+                border-bottom: 2px solid $primary-color;
+              }
+              .food-item:hover {
+                color: $base-color;
+                background-color: $primary-color;
+                transform: translateY(-4px);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // Start of Review
+  .kitchen-review {
+    width: 100%;
+    margin: 50px 0;
+
+    .kitchen-review_wrapper {
+      padding: 0 25px;
+
+      .kitchen-review_title {
+        color: $primary-color;
+        font-size: 1.5rem;
+        font-family: $secondary-font;
+        font-weight: $bold-weight;
+      }
+      form {
+        padding: 16px 0;
+
+        .form-input {
+          position: relative;
+          margin-top: 24px;
+
+          input {
+            width: 100%;
+            height: 36px;
+            padding: 22px 12px;
+            border: none;
+            border-bottom: 2px solid $primary-color;
+            outline: none;
+          }
+          label {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            font-size: 0.8rem;
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+          }
+          textarea {
+            width: 100%;
+            height: 80px;
+            padding: 22px 12px;
+            border: none;
+            border-bottom: 2px solid $primary-color;
+            outline: none;
+            resize: vertical;
+          }
+          input:is(:focus, :valid) ~ label,
+          textarea:is(:focus, :valid) ~ label {
+            top: -20px;
+            font-size: 0.7rem;
+            color: $primary-color;
+          }
+        }
+        button {
+          width: max-content;
+          margin-top: 12px;
+          padding: 12px 16px;
+          border: none;
+          color: $base-color;
+          background-color: $primary-color;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: #c86a2b;
+        }
+      }
+      .kitchen-review_list {
+        margin-top: 36px;
+        list-style: none;
+        @include grid(repeat(1, 1fr), 12px);
+
+        .kitchen-review_item {
+          padding: 12px;
+          border: #4f4a45 2px solid;
+          border-radius: 8px;
+          background-color: #f6f1ee;
+          transition: all 0.2s ease-out;
+          box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+
+          .kitchen-review_item_name {
+            color: $primary-color;
+            font-size: 1rem;
+            font-weight: $bold-weight;
+          }
+          .kitchen-review_item_review {
+            font-size: 0.8rem;
+            padding-left: 4px;
+          }
+        }
+      }
+    }
+  }
+  // Start of FavoriteInitiatorButton
+  .favorite {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $primary-color;
+
+    position: fixed;
+    bottom: 32px;
+    right: 16px;
+    border-radius: 50%;
+    border: 0;
+
+    font-size: 18px;
+    color: $base-color;
+    cursor: pointer;
+    z-index: 999;
+  }
+
+  // Start of Favorite Kitchen
+  .favorite-kitchen {
+    width: 100%;
+    padding: 104px 25px 0;
+
+    &_title {
+      color: $primary-color;
+      font-size: 1.5rem;
+      font-family: $secondary-font;
+      font-weight: $bold-weight;
+
+      span {
+        color: $accent-color;
+      }
+    }
+  }
+}
+/* End of Main */
+
+/* Start of Footer */
+footer {
+  width: 100%;
+  height: 60px;
+  @include flex(center, center, row, 0);
+  background-color: $primary-color;
+
+  p {
+    color: $base-color;
+
+    span {
+      color: $primary-color;
+    }
+  }
+}
+/* End of Footer */

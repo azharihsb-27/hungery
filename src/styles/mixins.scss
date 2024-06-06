@@ -1,0 +1,25 @@
+// Flex
+@mixin flex($justify, $align, $direction: row, $gap: 0) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  gap: $gap;
+}
+
+// Grid
+@mixin grid($columnTemplate, $gap: 0) {
+  display: grid;
+  grid-template-columns: $columnTemplate;
+  gap: $gap;
+}
+
+// Button
+@mixin clickable($padding, $color, $backgroundColor, $fontSize) {
+  padding: $padding;
+  color: $color;
+  background-color: $backgroundColor;
+  border: none;
+  font-size: $fontSize;
+  cursor: pointer;
+}
